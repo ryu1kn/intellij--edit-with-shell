@@ -69,8 +69,7 @@ jobs:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
-      # Run detekt, ktlint and tests
-      - name: Run Linters and Test
+      - name: Check code (including test)
         run: ./gradlew check
 
       # Run verifyPlugin Gradle task
