@@ -1,7 +1,7 @@
-package org.jetbrains.plugins.template.services
+package com.github.ryu1kn.intellijeditwithshell.services
 
+import com.github.ryu1kn.intellijeditwithshell.MyBundle
 import com.intellij.openapi.project.Project
-import org.jetbrains.plugins.template.MyBundle
 
 class MyProjectService(project: Project) {
 
