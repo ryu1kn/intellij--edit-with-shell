@@ -33,6 +33,16 @@ To keep everything working, do not remove `<!-- ... -->` sections.
   Download the [latest release](https://github.com/ryu1kn/intellij--edit-with-shell/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
+## References
+
+* [Busy plugin developers series. Episode 0](https://www.youtube.com/watch?v=-6D5-xEaYig)
+* IntelliJ Platform Plugin SDK
+    * [1. Working with Text](https://plugins.jetbrains.com/docs/intellij/working-with-text.html)
+    * [Multiple Carets](https://plugins.jetbrains.com/docs/intellij/multiple-carets.html)
+    * [Extension Point List](https://plugins.jetbrains.com/docs/intellij/extension-point-list.html)
+    * [IntelliJ Platform Explorer](https://plugins.jetbrains.com/intellij-platform-explorer)
+    * [Examples - Kotlin UI DSL](https://plugins.jetbrains.com/docs/intellij/kotlin-ui-dsl.html#examples)
+
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
 

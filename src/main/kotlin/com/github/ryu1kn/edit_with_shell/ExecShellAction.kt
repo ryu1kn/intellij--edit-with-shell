@@ -2,9 +2,25 @@ package com.github.ryu1kn.edit_with_shell
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.ui.popup.JBPopupFactory
 
 class ExecShellAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        println("Hello World!")
+        // Editor and Project were verified in update(), so they are not null.
+        val editor = e.getRequiredData(CommonDataKeys.EDITOR)
+        val project = e.getRequiredData(CommonDataKeys.PROJECT)
+
+        // Playing with a popup to enter a shell command
+        val popupFactory = JBPopupFactory.getInstance()
+        val listPopup = popupFactory.createListPopup(MyListPopupStep(project, editor))
+        listPopup.showInFocusCenter()
+    }
+
+    override fun update(e: AnActionEvent) {
+        val project = e.project
+        val editor = e.getData(CommonDataKeys.EDITOR)
+        // Set visibility and enable only in case of existing project and editor and if a selection exists
+        e.presentation.setEnabledAndVisible(project != null && editor != null)
     }
 }
