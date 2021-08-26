@@ -7,6 +7,15 @@
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
+    <actions>
+        <action id="com.github.ryu1kn.edit_with_shell.ExecShellAction"
+                class="com.github.ryu1kn.edit_with_shell.ExecShellAction"
+                text="Editor Replace Text"
+                description="Replaces selected text with 'Replacement'.">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.ryu1kn.edit_with_shell.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.ryu1kn.edit_with_shell.services.MyProjectService"/>
