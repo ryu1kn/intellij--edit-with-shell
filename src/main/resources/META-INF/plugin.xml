@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>com.github.ryu1kn.intellijeditwithshell</id>
-    <name>intellij--edit-with-shell</name>
+    <id>com.github.ryu1kn.edit_with_shell</id>
+    <name>Edit with Shell</name>
     <vendor>ryu1kn</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -8,12 +8,12 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.ryu1kn.intellijeditwithshell.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.ryu1kn.intellijeditwithshell.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.github.ryu1kn.edit_with_shell.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.github.ryu1kn.edit_with_shell.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.ryu1kn.intellijeditwithshell.listeners.MyProjectManagerListener"
+        <listener class="com.github.ryu1kn.edit_with_shell.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>

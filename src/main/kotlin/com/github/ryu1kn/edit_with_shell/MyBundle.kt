@@ -1,4 +1,4 @@
-package com.github.ryu1kn.intellijeditwithshell
+package com.github.ryu1kn.edit_with_shell
 
 import com.intellij.AbstractBundle
 import org.jetbrains.annotations.NonNls
