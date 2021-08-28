@@ -14,7 +14,7 @@ class ExecShellAction : AnAction() {
         // Playing with a popup to enter a shell command
         val popupFactory = JBPopupFactory.getInstance()
         val listPopup = popupFactory.createListPopup(MyListPopupStep(project, editor))
-        listPopup.showInFocusCenter()
+        listPopup.showInBestPositionFor(editor)
     }
 
     override fun update(e: AnActionEvent) {
