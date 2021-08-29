@@ -25,4 +25,9 @@
         <listener class="com.github.ryu1kn.edit_with_shell.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <projectListeners>
+        <listener class="com.github.ryu1kn.edit_with_shell.MyListener"
+                  topic="com.github.ryu1kn.edit_with_shell.MyNotifier" />
+    </projectListeners>
 </idea-plugin>

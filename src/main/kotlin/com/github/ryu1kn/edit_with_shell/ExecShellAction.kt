@@ -11,6 +11,8 @@ class ExecShellAction : AnAction() {
         val editor = e.getRequiredData(CommonDataKeys.EDITOR)
         val project = e.getRequiredData(CommonDataKeys.PROJECT)
 
+        MyPublisher().publish(project)
+
         // Playing with a popup to enter a shell command
         val popupFactory = JBPopupFactory.getInstance()
         val listPopup = popupFactory.createListPopup(MyListPopupStep(project, editor))
