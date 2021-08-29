@@ -19,7 +19,7 @@ class MyListPopupStep(val project: Project, val editor: Editor) : BaseListPopupS
         val dialog = ShellCommandInputDialog(project, selectedCommand).apply { show() }
 
         val publisher = project.messageBus.syncPublisher(PreselectionAware.CHANGE_ACTION_TOPIC)
-        val context = PreselectedContext(dialog.command(), project, editor)
+        val context = PreselectedContext(dialog.command(), editor)
         publisher.onPreselected(context)
     }
 }

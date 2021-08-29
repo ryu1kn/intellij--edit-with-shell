@@ -1,7 +1,6 @@
 package com.github.ryu1kn.edit_with_shell
 
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.project.Project
 import com.intellij.util.messages.Topic
 
 interface PreselectionAware {
@@ -12,4 +11,4 @@ interface PreselectionAware {
     }
 }
 
-data class PreselectedContext(val command: String?, val project: Project, val editor: Editor)
+data class PreselectedContext(val command: String?, val editor: Editor)
