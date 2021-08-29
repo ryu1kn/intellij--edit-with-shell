@@ -28,6 +28,6 @@
 
     <projectListeners>
         <listener class="com.github.ryu1kn.edit_with_shell.MyListener"
-                  topic="com.github.ryu1kn.edit_with_shell.MyNotifier" />
+                  topic="com.github.ryu1kn.edit_with_shell.PreselectionAware" />
     </projectListeners>
 </idea-plugin>

@@ -1,11 +1,20 @@
 package com.github.ryu1kn.edit_with_shell
 
-class MyListener : MyNotifier {
-    override fun beforeAction(context: EventContext) {
-        println("Received before action call (${context.name})")
-    }
+import com.intellij.openapi.command.WriteCommandAction
 
-    override fun afterAction(context: EventContext) {
-        println("Received after action call (${context.name})")
+class MyListener : PreselectionAware {
+    override fun onPreselected(context: PreselectedContext) {
+        val document = context.editor.document
+        val primaryCaret = context.editor.caretModel.primaryCaret
+        val project = context.project
+        WriteCommandAction.runWriteCommandAction(project) {
+            document.replaceString(
+                primaryCaret.selectionStart,
+                primaryCaret.selectionEnd,
+                ProcessBuilder(listOf("bash", "-c", context.command ?: ": No op"))
+                    .start().inputStream.bufferedReader().readText()
+            )
+        }
+        primaryCaret.removeSelection()
     }
 }
