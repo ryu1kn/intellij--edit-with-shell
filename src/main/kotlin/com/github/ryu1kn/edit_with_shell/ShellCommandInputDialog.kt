@@ -5,8 +5,10 @@ import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.layout.panel
 import javax.swing.JComponent
 
-class ShellCommandInputDialog(project: Project, selectedCommand: ShellCommand) : DialogWrapper(project) {
-    private var confirmedCommand = selectedCommand.commandString
+class ShellCommandInputDialog(project: Project, private val context: PreSelectionContext) : DialogWrapper(project) {
+    private val publisher = project.messageBus.syncPublisher(FinalSelectionAware.CHANGE_ACTION_TOPIC)
+
+    private var confirmedCommand = context.command.commandString
 
     init {
         title = "Command Confirmation"
@@ -22,5 +24,12 @@ class ShellCommandInputDialog(project: Project, selectedCommand: ShellCommand) :
         }
     }
 
-    fun command(): String? = if (isOK) confirmedCommand else null
+    override fun show() {
+        super.show()
+        if (isOK) notifyFinalSelection()
+    }
+
+    private fun notifyFinalSelection() {
+        publisher.onPublished(context.finalise(confirmedCommand))
+    }
 }

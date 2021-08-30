@@ -5,7 +5,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.PopupStep
 import com.intellij.openapi.ui.popup.util.BaseListPopupStep
 
-class MyListPopupStep(val project: Project, val editor: Editor) : BaseListPopupStep<ShellCommand>("Shell commands", listOf(ShellCommand("echo hi"), ShellCommand("echo hey"))) {
+class MyListPopupStep(project: Project, private val editor: Editor) : BaseListPopupStep<ShellCommand>("Shell commands", listOf(ShellCommand("echo hi"), ShellCommand("echo hey"))) {
+    private val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
+
     private lateinit var selectedCommand: ShellCommand
 
     override fun getTextFor(value: ShellCommand): String = value.commandString
@@ -16,11 +18,7 @@ class MyListPopupStep(val project: Project, val editor: Editor) : BaseListPopupS
     }
 
     override fun getFinalRunnable(): Runnable = Runnable {
-        val dialog = ShellCommandInputDialog(project, selectedCommand).apply { show() }
-
-        val publisher = project.messageBus.syncPublisher(PreselectionAware.CHANGE_ACTION_TOPIC)
-        val context = PreselectedContext(dialog.command(), editor)
-        publisher.onPreselected(context)
+        publisher.onPublished(PreSelectionContext(selectedCommand, editor))
     }
 }
 

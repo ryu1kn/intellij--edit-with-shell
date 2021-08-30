@@ -27,7 +27,9 @@
     </applicationListeners>
 
     <projectListeners>
-        <listener class="com.github.ryu1kn.edit_with_shell.MyListener"
-                  topic="com.github.ryu1kn.edit_with_shell.PreselectionAware" />
+        <listener class="com.github.ryu1kn.edit_with_shell.EditWithShellAction"
+                  topic="com.github.ryu1kn.edit_with_shell.FinalSelectionAware" />
+        <listener class="com.github.ryu1kn.edit_with_shell.FinaliseSelectionAction"
+                  topic="com.github.ryu1kn.edit_with_shell.PreSelectionAware" />
     </projectListeners>
 </idea-plugin>
