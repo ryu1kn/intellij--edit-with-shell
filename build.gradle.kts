@@ -16,6 +16,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    testImplementation(kotlin("test"))
+}
+
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     pluginName.set(properties("pluginName"))
@@ -40,6 +44,10 @@ tasks {
     }
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
+    }
+
+    test {
+        useJUnitPlatform()
     }
 
     patchPluginXml {
