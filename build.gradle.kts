@@ -1,12 +1,13 @@
 import org.jetbrains.changelog.markdownToHTML
+import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.5.30"
-    id("org.jetbrains.intellij") version "1.1.4"
-    id("org.jetbrains.changelog") version "1.3.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.24"
+    id("org.jetbrains.intellij") version "1.17.3"
+    id("org.jetbrains.changelog") version "1.3.1"
 }
 
 group = properties("pluginGroup")
@@ -43,8 +44,12 @@ tasks {
         targetCompatibility = "1.8"
     }
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
+
+//    runIde {
+//        jbrVersion.set("jbr_jcef-11_0_9-osx-aarch64-b944.49")
+//    }
 
     test {
         useJUnitPlatform()

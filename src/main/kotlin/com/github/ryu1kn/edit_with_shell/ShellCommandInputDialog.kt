@@ -2,7 +2,8 @@ package com.github.ryu1kn.edit_with_shell
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import com.intellij.ui.layout.panel
+import com.intellij.ui.dsl.builder.bindText
+import com.intellij.ui.dsl.builder.panel
 import javax.swing.JComponent
 
 class ShellCommandInputDialog(project: Project, private val context: PreSelectionContext) : DialogWrapper(project) {
@@ -20,7 +21,7 @@ class ShellCommandInputDialog(project: Project, private val context: PreSelectio
             label("Please confirm a command before execute")
         }
         row {
-            textField({ confirmedCommand }, { confirmedCommand = it }).focused()
+            textField().bindText(::confirmedCommand).focused()
         }
     }
 
