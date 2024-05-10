@@ -12,8 +12,14 @@ class ExecShellAction : AnAction() {
         val project = e.getRequiredData(CommonDataKeys.PROJECT)
 
         // Get them from somewhere real
-        // XXX: Can't proceed if it's for the first time. i.e. empty list
         val historicalCommands = listOf("echo hi", "echo hey", "ls")
+
+        if (historicalCommands.isEmpty()) {
+            // This way we can reuse the same input dialog
+            val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
+            publisher.onPublished(PreSelectionContext(ShellCommand(""), editor))
+            return
+        }
 
         // Playing with a popup to enter a shell command
         val popupFactory = JBPopupFactory.getInstance()
