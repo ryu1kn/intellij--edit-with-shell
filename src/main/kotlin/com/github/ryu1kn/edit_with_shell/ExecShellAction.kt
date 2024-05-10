@@ -1,8 +1,10 @@
 package com.github.ryu1kn.edit_with_shell
 
+import com.github.ryu1kn.edit_with_shell.services.MyProjectService
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.components.service
 import com.intellij.openapi.ui.popup.JBPopupFactory
 
 class ExecShellAction : AnAction() {
@@ -20,6 +22,9 @@ class ExecShellAction : AnAction() {
             publisher.onPublished(PreSelectionContext(ShellCommand(""), editor))
             return
         }
+
+        // With project, I can access my services
+        project.service<MyProjectService>().doSomething()
 
         // Playing with a popup to enter a shell command
         val popupFactory = JBPopupFactory.getInstance()
