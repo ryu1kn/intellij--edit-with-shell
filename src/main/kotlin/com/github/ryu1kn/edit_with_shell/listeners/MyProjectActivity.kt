@@ -3,11 +3,11 @@ package com.github.ryu1kn.edit_with_shell.listeners
 import com.github.ryu1kn.edit_with_shell.services.MyProjectService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.ProjectManagerListener
+import com.intellij.openapi.startup.ProjectActivity
 
-internal class MyProjectManagerListener : ProjectManagerListener {
+internal class MyProjectActivity : ProjectActivity {
 
-    override fun projectOpened(project: Project) {
+    override suspend fun execute(project: Project) {
         project.service<MyProjectService>()
     }
 }
