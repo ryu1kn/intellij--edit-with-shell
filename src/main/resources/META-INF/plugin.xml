@@ -17,8 +17,6 @@
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.ryu1kn.edit_with_shell.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.ryu1kn.edit_with_shell.services.MyProjectService"/>
         <postStartupActivity implementation="com.github.ryu1kn.edit_with_shell.listeners.MyProjectActivity"/>
     </extensions>
 
