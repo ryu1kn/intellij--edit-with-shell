@@ -5,7 +5,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.PopupStep
 import com.intellij.openapi.ui.popup.util.BaseListPopupStep
 
-class MyListPopupStep(project: Project, private val editor: Editor) : BaseListPopupStep<ShellCommand>("Shell commands", listOf(ShellCommand("echo hi"), ShellCommand("echo hey"))) {
+class MyListPopupStep(project: Project, private val editor: Editor, historicalCommands: List<String>):
+        BaseListPopupStep<ShellCommand>("Shell commands", historicalCommands.map(::ShellCommand)) {
+
     private val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
 
     private lateinit var selectedCommand: ShellCommand

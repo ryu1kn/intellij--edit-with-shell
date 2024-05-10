@@ -11,9 +11,13 @@ class ExecShellAction : AnAction() {
         val editor = e.getRequiredData(CommonDataKeys.EDITOR)
         val project = e.getRequiredData(CommonDataKeys.PROJECT)
 
+        // Get them from somewhere real
+        // XXX: Can't proceed if it's for the first time. i.e. empty list
+        val historicalCommands = listOf("echo hi", "echo hey", "ls")
+
         // Playing with a popup to enter a shell command
         val popupFactory = JBPopupFactory.getInstance()
-        val listPopup = popupFactory.createListPopup(MyListPopupStep(project, editor))
+        val listPopup = popupFactory.createListPopup(MyListPopupStep(project, editor, historicalCommands))
         listPopup.showInBestPositionFor(editor)
     }
 
