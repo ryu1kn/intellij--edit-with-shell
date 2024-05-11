@@ -6,6 +6,12 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.components.service
 import com.intellij.openapi.ui.popup.JBPopupFactory
+import com.intellij.ui.ListSpeedSearch
+import com.intellij.ui.SpeedSearchBase
+import com.intellij.ui.TreeUIHelper
+import com.intellij.ui.components.JBList
+import com.intellij.ui.table.JBTable
+import com.intellij.util.ui.table.JBListTable
 
 class ExecShellAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
@@ -27,9 +33,16 @@ class ExecShellAction : AnAction() {
         project.service<MyProjectService>().doSomething()
 
         // Playing with a popup to enter a shell command
-        val popupFactory = JBPopupFactory.getInstance()
-        val listPopup = popupFactory.createListPopup(MyListPopupStep(project, editor, historicalCommands))
-        listPopup.showInBestPositionFor(editor)
+        val list = JBList(historicalCommands).also { TreeUIHelper.getInstance().installListSpeedSearch(it) }
+
+        JBPopupFactory.getInstance().createListPopupBuilder(list)
+            .setFilterAlwaysVisible(true)
+            .setItemChosenCallback { selectedValue ->
+                val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
+                publisher.onPublished(PreSelectionContext(ShellCommand(selectedValue.toString()), editor))
+            }
+            .createPopup()
+            .showInBestPositionFor(editor)
     }
 
     override fun update(e: AnActionEvent) {
@@ -38,4 +51,6 @@ class ExecShellAction : AnAction() {
         // Set visibility and enable only in case of existing project and editor and if a selection exists
         e.presentation.setEnabledAndVisible(project != null && editor != null)
     }
+
+    data class ShellCommand(val commandString: String)
 }
