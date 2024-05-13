@@ -16,10 +16,6 @@
         </action>
     </actions>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="com.github.ryu1kn.edit_with_shell.listeners.MyProjectActivity"/>
-    </extensions>
-
     <projectListeners>
         <listener class="com.github.ryu1kn.edit_with_shell.EditWithShellAction"
                   topic="com.github.ryu1kn.edit_with_shell.FinalSelectionAware" />
