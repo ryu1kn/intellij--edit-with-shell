@@ -5,10 +5,13 @@ import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.ui.TreeUIHelper
 import com.intellij.ui.components.JBList
 
-interface SearchableListPicker
+interface SearchableListPicker {
+    fun show(items: List<String>, handler: (String) -> Unit)
+}
 
-class SearchableListPickerImpl : SearchableListPicker {
-    fun show(items: List<String>, editor: Editor, handler: (String) -> Unit) {
+class SearchableListPickerImpl(private val editor: Editor) : SearchableListPicker {
+
+    override fun show(items: List<String>, handler: (String) -> Unit) {
         val list = JBList(items).also { TreeUIHelper.getInstance().installListSpeedSearch(it) }
 
         JBPopupFactory.getInstance().createListPopupBuilder(list)
