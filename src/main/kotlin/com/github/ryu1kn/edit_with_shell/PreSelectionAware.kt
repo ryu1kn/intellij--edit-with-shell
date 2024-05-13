@@ -11,6 +11,6 @@ interface PreSelectionAware {
     }
 }
 
-data class PreSelectionContext(val command: ExecShellAction.ShellCommand, val editor: Editor) {
+data class PreSelectionContext(val command: MainAction.ShellCommand, val editor: Editor) {
     fun finalise(command: String) = FinalSelectionContext(command, editor)
 }

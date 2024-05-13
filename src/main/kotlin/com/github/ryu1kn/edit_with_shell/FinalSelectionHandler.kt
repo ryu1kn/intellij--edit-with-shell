@@ -3,8 +3,11 @@ package com.github.ryu1kn.edit_with_shell
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.project.Project
 
-class EditWithShellAction(private val project: Project) : FinalSelectionAware {
-    override fun onPublished(context: FinalSelectionContext) {
+class FinalSelectionHandler(private val project: Project) : FinalSelectionAware {
+
+    override fun onPublished(context: FinalSelectionContext) = pipeEditorText(context)
+
+    private fun pipeEditorText(context: FinalSelectionContext) {
         val document = context.editor.document
         val primaryCaret = context.editor.caretModel.primaryCaret
         WriteCommandAction.runWriteCommandAction(project) {
