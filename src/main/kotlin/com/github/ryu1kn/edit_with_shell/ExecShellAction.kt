@@ -1,6 +1,7 @@
 package com.github.ryu1kn.edit_with_shell
 
 import com.github.ryu1kn.edit_with_shell.services.MyProjectService
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -14,6 +15,9 @@ import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.table.JBListTable
 
 class ExecShellAction : AnAction() {
+
+    override fun getActionUpdateThread() = ActionUpdateThread.BGT
+
     override fun actionPerformed(e: AnActionEvent) {
         // Editor and Project were verified in update(), so they are not null.
         val editor = e.getRequiredData(CommonDataKeys.EDITOR)
