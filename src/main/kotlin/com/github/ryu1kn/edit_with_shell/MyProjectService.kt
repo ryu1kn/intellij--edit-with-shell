@@ -1,4 +1,4 @@
-package com.github.ryu1kn.edit_with_shell.services
+package com.github.ryu1kn.edit_with_shell
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project

@@ -1,18 +1,13 @@
 package com.github.ryu1kn.edit_with_shell
 
-import com.github.ryu1kn.edit_with_shell.services.MyProjectService
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.components.service
 import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.intellij.ui.ListSpeedSearch
-import com.intellij.ui.SpeedSearchBase
 import com.intellij.ui.TreeUIHelper
 import com.intellij.ui.components.JBList
-import com.intellij.ui.table.JBTable
-import com.intellij.util.ui.table.JBListTable
 
 class ExecShellAction : AnAction() {
 
