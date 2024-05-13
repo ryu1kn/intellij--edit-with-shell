@@ -1,13 +1,11 @@
 package com.github.ryu1kn.edit_with_shell
 
+import com.github.ryu1kn.edit_with_shell.ui.SearchableListPickerImpl
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.components.service
-import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.intellij.ui.TreeUIHelper
-import com.intellij.ui.components.JBList
 
 class ExecShellAction : AnAction() {
 
@@ -31,17 +29,10 @@ class ExecShellAction : AnAction() {
         // With project, I can access my services
         project.service<MyProjectService>().doSomething()
 
-        // Playing with a popup to enter a shell command
-        val list = JBList(historicalCommands).also { TreeUIHelper.getInstance().installListSpeedSearch(it) }
-
-        JBPopupFactory.getInstance().createListPopupBuilder(list)
-            .setFilterAlwaysVisible(true)
-            .setItemChosenCallback { selectedValue ->
-                val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
-                publisher.onPublished(PreSelectionContext(ShellCommand(selectedValue.toString()), editor))
-            }
-            .createPopup()
-            .showInBestPositionFor(editor)
+        SearchableListPickerImpl().show(historicalCommands, editor) { selectedValue ->
+            val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
+            publisher.onPublished(PreSelectionContext(ShellCommand(selectedValue), editor))
+        }
     }
 
     override fun update(e: AnActionEvent) {
