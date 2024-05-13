@@ -1,6 +1,7 @@
 package com.github.ryu1kn.edit_with_shell
 
 import com.github.ryu1kn.edit_with_shell.ui.SearchableListPickerImpl
+import com.github.ryu1kn.edit_with_shell.ui.ShellCommandInputDialog
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -11,9 +12,9 @@ class Main {
         val historicalCommands = listOf("echo hi", "echo hey", "ls")
 
         if (historicalCommands.isEmpty()) {
-            // This way we can reuse the same input dialog
-            val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
-            publisher.onPublished(PreSelectionContext(ShellCommand(""), editor))
+            ShellCommandInputDialog(project).show("") {
+                EditorWrapper(project, editor).pipeText(it)
+            }
             return
         }
 
@@ -21,10 +22,9 @@ class Main {
         project.service<MyProjectService>().doSomething()
 
         SearchableListPickerImpl().show(historicalCommands, editor) { selectedValue ->
-            val publisher = project.messageBus.syncPublisher(PreSelectionAware.CHANGE_ACTION_TOPIC)
-            publisher.onPublished(PreSelectionContext(ShellCommand(selectedValue), editor))
+            ShellCommandInputDialog(project).show(selectedValue) {
+                EditorWrapper(project, editor).pipeText(it)
+            }
         }
     }
 }
-
-data class ShellCommand(val commandString: String)

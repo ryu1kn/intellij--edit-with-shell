@@ -15,11 +15,4 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
-
-    <projectListeners>
-        <listener class="com.github.ryu1kn.edit_with_shell.FinalSelectionHandler"
-                  topic="com.github.ryu1kn.edit_with_shell.FinalSelectionAware" />
-        <listener class="com.github.ryu1kn.edit_with_shell.PreSelectionHandler"
-                  topic="com.github.ryu1kn.edit_with_shell.PreSelectionAware" />
-    </projectListeners>
 </idea-plugin>
