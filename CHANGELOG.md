@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# intellij--edit-with-shell Changelog
+# sandbox--intellij-plugin Changelog
 
 ## [Unreleased]
 ### Added
